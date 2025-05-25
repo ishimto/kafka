@@ -16,3 +16,8 @@ spec:
       - name: mongo-consumer
         image: {{ .Values.consumer.image.name }}:{{ .Values.consumer.image.tag }}
         imagePullPolicy: Always
+        envFrom:
+        - configMapRef:
+            name: "{{ .Values.consumer.configmap.mongo }}"
+        - configMapRef:
+            name: "{{ .Values.consumer.configmap.kafka }}"

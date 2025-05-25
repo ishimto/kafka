@@ -1,11 +1,13 @@
+import os
 from kafka import KafkaConsumer
 from pymongo import MongoClient
 import json
 
-KAFKA_BROKER = 'kafka-broker-0.kafka-headless.default.svc.cluster.local:9092'
+
+KAFKA_BROKER = os.getenv("KAFKA")
 TOPIC_NAME = 'myshop'
 
-MONGO_URI = 'mongodb://root:changeme@mongodb.default.svc.cluster.local:27017'
+MONGO_URI = os.getenv("MONGO_LOGIN")
 DB_NAME = 'shop'
 COLLECTION_NAME = 'products'
 

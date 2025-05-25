@@ -1,7 +1,9 @@
+import os
 from pymongo import MongoClient
 
 
-MONGO_URI = 'mongodb://root:changeme@mongodb.default.svc.cluster.local:27017'
+
+MONGO_URI = os.getenv("MONGO_LOGIN")
 DB_NAME = 'shop'
 COLLECTION_NAME = 'products'
 

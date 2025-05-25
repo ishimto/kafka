@@ -6,6 +6,9 @@ deployment:
       name: gingerous/flaskkafka
       tag: latest
       imagePullPolicy: Always
+    configmap:
+      mongo: mongodb-cm
+      kafka: kafka-cm
   nginx:
     containerName: nginx
     image:

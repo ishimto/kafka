@@ -102,3 +102,10 @@ in minikube:
 ```
 minikube service kafdrop-svc
 ```
+
+
+* in this project the config maps are uploaded, in order to use it in your production, avoid to push it into your git with credentials.
+  use .gitignore or some secret manager.
+
+
+HAPPY HEALMING!!

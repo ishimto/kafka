@@ -2,7 +2,9 @@ consumer:
   image:
     name: "gingerous/consumer"
     tag: "test"
-
+  configmap:
+    mongo: mongodb-cm
+    kafka: kafka-cm
 
 
 # Copyright Broadcom, Inc. All Rights Reserved.

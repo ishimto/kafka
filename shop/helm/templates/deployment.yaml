@@ -16,6 +16,11 @@ spec:
       - name: {{ .Values.deployment.flask.containerName }}
         image: {{ .Values.deployment.flask.image.name }}:{{ .Values.deployment.flask.image.tag }}
         imagePullPolicy: {{ .Values.deployment.flask.image.imagePullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: "{{ .Values.deployment.flask.configmap.mongo }}"
+        - configMapRef:
+            name: "{{ .Values.deployment.flask.configmap.kafka }}"
 
       - name: {{ .Values.deployment.nginx.containerName }}
         image: {{ .Values.deployment.nginx.image.name }}:{{ .Values.deployment.nginx.image.tag }}
