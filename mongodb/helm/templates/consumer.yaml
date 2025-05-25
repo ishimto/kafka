@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-consumer
+  template:
+    metadata:
+      labels:
+        app: mongo-consumer
+    spec:
+      containers:
+      - name: mongo-consumer
+        image: {{ .Values.consumer.image.name }}:{{ .Values.consumer.image.tag }}
+        imagePullPolicy: Always

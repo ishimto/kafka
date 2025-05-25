@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Shop</title>
+  <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+  <h1>My Shop</h1>
+  
+  <!-- טופס לשליחת input לשרת -->
+  <form id="user-form">
+    <label for="user-input">Enter something:</label>
+    <input type="text" id="user-input" name="user-input" required>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="response"></div>
+
+  <div id="app">Loading...</div>
+
+  <script>
+    document.getElementById('user-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const inputValue = document.getElementById('user-input').value;
+
+      const response = await fetch('/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_input: inputValue })
+      });
+
+      const result = await response.json();
+      document.getElementById('response').innerText = result.message;
+    });
+  </script>
+</body>
+</html>
+

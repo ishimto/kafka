@@ -1,0 +1,30 @@
+deployment:
+  name: flask-shop
+  flask:
+    containerName: flask
+    image:
+      name: gingerous/flaskkafka
+      tag: latest
+      imagePullPolicy: Always
+  nginx:
+    containerName: nginx
+    image:
+      name: nginx
+      tag: alpine
+      imagePullPolicy: Always
+
+service:
+  name: nginx-service
+  type: LoadBalancer
+  port:
+    protocol: TCP
+    port: 80
+    targetPort: 80
+
+
+volumes:
+  html:
+    name: frontend-files
+  nginxConfig:
+    name: nginx-config
+    

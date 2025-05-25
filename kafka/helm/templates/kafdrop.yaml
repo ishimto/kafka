@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.kafdrop.name }}
+  labels:
+    app: {{ .Values.kafdrop.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.kafdrop.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.kafdrop.name }}
+    spec:
+      containers:
+      - name: {{ .Values.kafdrop.name }}
+        image: obsidiandynamics/kafdrop:latest
+        ports:
+        - containerPort: 9000
+        env:
+        - name: KAFKA_BROKERCONNECT
+          #value: "kafka-broker-0.kafka-headless.default.svc.cluster.local:9092"
+          value: "{{- include "notes.internal.bootstrapServers" . | nindent 4 }}"
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.kafdrop.service.name }}
+  labels:
+    name: {{ .Values.kafdrop.service.name }}
+spec:
+  type: {{ .Values.kafdrop.service.type }}
+  selector:
+    app: {{ .Values.kafdrop.name }}
+  ports:
+  - protocol: {{ .Values.kafdrop.service.protocol }}
+    port: {{ .Values.kafdrop.service.port }}
+    targetPort: {{ .Values.kafdrop.service.targetPort }}
